@@ -1,11 +1,13 @@
 package com.example.testcodex.model.response
 
+import javax.annotation.Generated
 import com.google.gson.annotations.SerializedName
 
-data class StoryResponse(
+@Generated("com.robohorse.robopojogenerator")
+data class CommentResponse(
 
-	@field:SerializedName("score")
-	val score: Int? = null,
+	@field:SerializedName("parent")
+	val parent: Int? = null,
 
 	@field:SerializedName("by")
 	val by: String? = null,
@@ -13,21 +15,15 @@ data class StoryResponse(
 	@field:SerializedName("id")
 	val id: Int? = null,
 
+	@field:SerializedName("text")
+	val text: String? = null,
+
 	@field:SerializedName("time")
 	val time: Int? = null,
-
-	@field:SerializedName("title")
-	val title: String? = null,
 
 	@field:SerializedName("type")
 	val type: String? = null,
 
-	@field:SerializedName("descendants")
-	val descendants: Int? = null,
-
-	@field:SerializedName("url")
-	val url: String? = null,
-
 	@field:SerializedName("kids")
-	val kids: List<String?>? = null
+	val kids: List<Int?>? = null
 )

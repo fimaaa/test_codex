@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.testcodex.injection.component.DaggerViewModelInjector
 import com.example.testcodex.injection.component.ViewModelInjector
 import com.example.testcodex.injection.module.NetworkModule
+import com.example.testcodex.ui.activity.detailstories.DetailStoriesViewModel
 import com.example.testcodex.ui.activity.topstories.TopStoriesViewModel
 
 abstract class BaseViewModel: ViewModel() {
@@ -22,7 +23,7 @@ abstract class BaseViewModel: ViewModel() {
     private fun inject() {
         when (this) {
             is TopStoriesViewModel -> injector.inject(this)
-//            is SearchMovieViewModel -> injector.inject(this)
+            is DetailStoriesViewModel -> injector.inject(this)
         }
     }
 }

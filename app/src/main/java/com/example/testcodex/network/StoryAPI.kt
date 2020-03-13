@@ -1,5 +1,6 @@
 package com.example.testcodex.network
 
+import com.example.testcodex.model.response.CommentResponse
 import com.example.testcodex.model.response.StoryResponse
 import io.reactivex.Observable
 import okhttp3.ResponseBody
@@ -23,5 +24,10 @@ interface StoryAPI {
     fun getStory(
         @Path("idStory") idStory:String
     ):Observable<StoryResponse>
+
+    @GET("/v0/item/{idStory}")
+    fun getComment(
+        @Path("idStory") idStory:String
+    ):Observable<CommentResponse>
 
 }

@@ -1,6 +1,12 @@
 package com.example.testcodex.utils
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.os.Build
+import android.text.Html
+import android.text.SpannableStringBuilder
+import android.text.method.LinkMovementMethod
+import android.widget.TextView
 import com.bumptech.glide.request.RequestOptions
 import com.example.testcodex.R
 
@@ -15,6 +21,13 @@ class Constans {
             requestOptions.error(R.color.black)
 
             return requestOptions
+        }
+
+        fun setTextViewHTML(text: TextView, html: String) {
+            val sequence = Html.fromHtml(html)
+            val strBuilder = SpannableStringBuilder(sequence)
+            text.text = strBuilder
+            text.movementMethod = LinkMovementMethod.getInstance()
         }
     }
 }

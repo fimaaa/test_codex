@@ -20,7 +20,6 @@ class TopStoriesActivity:AppCompatActivity() {
             ViewModelProviders.of(this).get(TopStoriesViewModel::class.java)
 //        ViewModelProvider(this).get(PostListViewModel::class.java)
         binding.viewModel = viewModel
-        println("loadTopStory1")
         viewModel.loadTopStory()
     }
 }

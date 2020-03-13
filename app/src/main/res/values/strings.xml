@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TestCodex</string>
+    <string name="deskripsi">Deskripsi :</string>
+    <string name="komentar">Komentar :</string>
 </resources>

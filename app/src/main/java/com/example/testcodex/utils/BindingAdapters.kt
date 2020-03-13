@@ -27,6 +27,20 @@ fun setMutableText(view: TextView, text: MutableLiveData<String>?) {
     }
 }
 
+@BindingAdapter("mutableHTML")
+fun setMutableHTML(view: TextView, text: MutableLiveData<String>?) {
+    val parentActivity:AppCompatActivity? = view.getParentActivity()
+    if(parentActivity != null && text != null) {
+        text.observe(parentActivity, Observer { value ->
+            if(value!=null){
+                Constans.setTextViewHTML(view,value)
+            }else{
+                view.text = ""
+            }
+        })
+    }
+}
+
 @BindingAdapter("mutableMax")
 fun setMax(view: ProgressBar, max:MutableLiveData<Int>?) {
     val parentActivity:AppCompatActivity? = view.getParentActivity()
@@ -47,15 +61,7 @@ fun setProgress(view: ProgressBar, progress:MutableLiveData<Int>?) {
     }
 }
 
-@BindingAdapter("mutableGlide")
-fun setMutableGlide(view: ImageView, link:MutableLiveData<String>?){
-    val parentActivity:AppCompatActivity? = view.getParentActivity()
-    if(parentActivity != null && link != null) {
-        link.observe(parentActivity, Observer { value ->
-            Glide.with(parentActivity)
-                .applyDefaultRequestOptions(Constans.getRequestOption())
-                .load(value)
-                .into(view)
-        })
-    }
+@BindingAdapter("adapter")
+fun setAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
+    view.adapter = adapter
 }

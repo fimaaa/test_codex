@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.testcodex.R
 import com.example.testcodex.databinding.ItemStoriesBinding
 import com.example.testcodex.model.response.StoryResponse
+import com.example.testcodex.ui.activity.detailstories.DetailStoriesActivity
 
 class StoryAdapter:RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
     private val listTopStory: MutableList<StoryResponse?>? = mutableListOf()
@@ -48,6 +49,10 @@ class StoryAdapter:RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
         fun bind(item:StoryResponse?){
             viewModel.bind(item)
             binding.viewModel = viewModel
+            binding.root.setOnClickListener {
+                val mContext = binding.root.context
+                mContext.startActivity(DetailStoriesActivity.startActivity(mContext,item))
+            }
         }
     }
 
