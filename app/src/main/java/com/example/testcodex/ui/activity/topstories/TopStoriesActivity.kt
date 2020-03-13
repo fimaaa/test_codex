@@ -37,20 +37,15 @@ class TopStoriesActivity:AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        println("requestcode = $requestCode")
         if (requestCode == DetailStoriesActivity.RESULT_DETAIL) {
-            println("resul = $resultCode")
             if (resultCode == Activity.RESULT_OK) {
                 val favorite = data?.getBooleanExtra(INTENT_ISFAVORITE,false)?:false
                 val responseString = data?.getStringExtra(INTENT_RESPONSE_STORY)?:""
-                println("${data?.extras} dataString Top")
-                println("top responseString = $responseString")
                 val dataResponse = DetailStoriesActivity.getResponse(responseString)
-                println("favorite = $favorite")
                 if(favorite){
-                    println("dataResponse = $dataResponse")
-                    println("dataResponse title = ${dataResponse?.title}")
                     viewModel.favoriteStory.value = dataResponse?.title
+                }else if(dataResponse?.title == viewModel.favoriteStory.value){
+                    viewModel.favoriteStory.value = ""
                 }
             }
         }

@@ -50,7 +50,10 @@ class StoryAdapter:RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
         holder.bind(listTopStory?.get(position))
         holder.itemView.setOnClickListener {
             val mContext = holder.itemView.context
+            println("title = ${listTopStory?.get(position)?.title}")
+            println("title Favorite = $titleFavorite")
             val isFavorite = listTopStory?.get(position)?.title == titleFavorite
+            println("title isFavorite = $isFavorite")
             (mContext as Activity).startActivityForResult(
                 DetailStoriesActivity.startActivity(
                     mContext,

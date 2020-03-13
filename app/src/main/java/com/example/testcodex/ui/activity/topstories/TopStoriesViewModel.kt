@@ -67,7 +67,6 @@ class TopStoriesViewModel:BaseViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
-                println("loadTopStory loadStory ke-0 = ${totalStory.value?.get(0)}")
             }
             .doOnTerminate {
                 val progress = (percentageProgress.value?:0)+1

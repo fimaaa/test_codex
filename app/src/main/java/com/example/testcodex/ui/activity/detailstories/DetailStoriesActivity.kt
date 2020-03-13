@@ -67,7 +67,6 @@ class DetailStoriesActivity: AppCompatActivity() {
 
     override fun finish() {
         val responseString:String = intent.getStringExtra(INTENT_RESPONSE_STORY)?:"Pass Data Error"
-        println("detail responseString = $responseString")
         val intent = Intent()
         intent.putExtra(TopStoriesActivity.INTENT_RESPONSE_STORY,responseString)
         intent.putExtra(TopStoriesActivity.INTENT_ISFAVORITE, viewModel.isFavorite.value)
