@@ -1,5 +1,6 @@
 package com.example.testcodex.ui.adapter.story
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -8,6 +9,7 @@ import com.example.testcodex.R
 import com.example.testcodex.databinding.ItemStoriesBinding
 import com.example.testcodex.model.response.StoryResponse
 import com.example.testcodex.ui.activity.detailstories.DetailStoriesActivity
+
 
 class StoryAdapter:RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
     private val listTopStory: MutableList<StoryResponse?>? = mutableListOf()
@@ -51,7 +53,7 @@ class StoryAdapter:RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
             binding.viewModel = viewModel
             binding.root.setOnClickListener {
                 val mContext = binding.root.context
-                mContext.startActivity(DetailStoriesActivity.startActivity(mContext,item))
+                (mContext as Activity).startActivityForResult(DetailStoriesActivity.startActivity(mContext,item,false),DetailStoriesActivity.RESULT_DETAIL)
             }
         }
     }

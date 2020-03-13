@@ -16,6 +16,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:src="@drawable/ic_favorit_on"
+            android:onClick="@{() -> viewModel.changeFavorite()}"
             />
         <TextView
             android:id="@+id/tv_title_story"

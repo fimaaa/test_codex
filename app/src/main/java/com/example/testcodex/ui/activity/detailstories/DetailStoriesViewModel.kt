@@ -21,15 +21,21 @@ class DetailStoriesViewModel:BaseViewModel() {
     val authorStory = MutableLiveData<String>()
     val textStory = MutableLiveData<String>()
     val listComment = MutableLiveData<MutableList<String?>>()
+    val isFavorite = MutableLiveData<Boolean>()
 
     val commentAdapter = KomentarAdapter()
 
-    fun bind(story:StoryResponse?){
+    fun bind(story:StoryResponse?, isFavorite:Boolean){
         titleStory.value = story?.title
         authorStory.value = "By : ${story?.by}"
         textStory.value = story?.url
         listComment.value = story?.kids?.toMutableList()
+        this.isFavorite.value = isFavorite
         loadComment()
+    }
+
+    fun changeFavorite(){
+        isFavorite.value = !(isFavorite.value?:false)
     }
 
     private fun loadComment(){

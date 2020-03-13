@@ -51,11 +51,9 @@ class TopStoriesViewModel:BaseViewModel() {
 
     private fun getListStory(response:ResponseBody){
         var stringList = response.string()
-        println("loadTopStory string start = $stringList")
         stringList = stringList.replace("[","")
         stringList = stringList.replace("]","")
         stringList  = stringList.replace(" ","")
-        println("loadTopStory string end = $stringList")
         totalStory.value = stringList.split(",").toMutableList()
         percentageMax.value = totalStory.value?.size
     }
@@ -74,7 +72,6 @@ class TopStoriesViewModel:BaseViewModel() {
             .doOnTerminate {
                 val progress = (percentageProgress.value?:0)+1
                 percentageProgress.value =  progress
-                favoriteStory.value = "${percentageProgress.value} of ${percentageMax.value}"
                 totalStory.value?.removeAt(0)
                 if(totalStory.value?.size?:0 > 0){
                     loadStory()
