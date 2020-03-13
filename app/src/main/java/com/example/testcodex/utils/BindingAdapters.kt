@@ -1,6 +1,7 @@
 package com.example.testcodex.utils
 
 import android.view.View
+import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -64,4 +65,12 @@ fun setProgress(view: ProgressBar, progress:MutableLiveData<Int>?) {
 @BindingAdapter("adapter")
 fun setAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
     view.adapter = adapter
+}
+
+@BindingAdapter("mutablewebview")
+fun setWebview(view:WebView,url:MutableLiveData<String>?){
+    val parentActivity:AppCompatActivity? = view.getParentActivity()
+    if(parentActivity != null && url != null) {
+        view.loadUrl(url.value)
+    }
 }
