@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.testcodex.R
 import com.example.testcodex.databinding.ActivityDetailstoriesBinding
 import com.example.testcodex.model.response.StoryResponse
+import com.example.testcodex.ui.activity.topstories.TopStoriesActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -18,8 +19,8 @@ class DetailStoriesActivity: AppCompatActivity() {
     private lateinit var viewModel:DetailStoriesViewModel
 
     companion object{
-        const val INTENT_RESPONSE_STORY = "intent_story_response"
-        const val INTENT_ISFAVORITE = "intent_story_favorite"
+        const val INTENT_RESPONSE_STORY = "intent_detail_story_response"
+        const val INTENT_ISFAVORITE = "intent_detail_story_favorite"
         const val RESULT_DETAIL = 1
 
         fun startActivity(mContext: Context, storyResponse: StoryResponse?,isFavorite:Boolean): Intent {
@@ -65,14 +66,11 @@ class DetailStoriesActivity: AppCompatActivity() {
     }
 
     override fun finish() {
-        println("hasil dataResponse = ${intent.getStringExtra(INTENT_RESPONSE_STORY)}")
-
-        val responseString = intent.getStringExtra(INTENT_RESPONSE_STORY)
-        println("hasil responseString = ${intent.getStringExtra(DetailStoriesActivity.INTENT_RESPONSE_STORY)}")
-
+        val responseString:String = intent.getStringExtra(INTENT_RESPONSE_STORY)?:"Pass Data Error"
+        println("detail responseString = $responseString")
         val intent = Intent()
-        intent.putExtra(INTENT_RESPONSE_STORY,responseString)
-        intent.putExtra(INTENT_ISFAVORITE, viewModel.isFavorite.value)
+        intent.putExtra(TopStoriesActivity.INTENT_RESPONSE_STORY,responseString)
+        intent.putExtra(TopStoriesActivity.INTENT_ISFAVORITE, viewModel.isFavorite.value)
         setResult(RESULT_OK, intent)
         super.finish()
     }

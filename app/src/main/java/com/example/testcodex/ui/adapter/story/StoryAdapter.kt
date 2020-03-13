@@ -14,6 +14,8 @@ import com.example.testcodex.ui.activity.detailstories.DetailStoriesActivity
 class StoryAdapter:RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
     private val listTopStory: MutableList<StoryResponse?>? = mutableListOf()
 
+    var titleFavorite = ""
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemStoriesBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
@@ -36,12 +38,27 @@ class StoryAdapter:RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
         notifyItemChanged(itemCount)
     }
 
+    fun changeFavorite(title:String?){
+        this.titleFavorite = title?:""
+    }
+
     override fun getItemCount(): Int {
         return  listTopStory?.size?:0
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(listTopStory?.get(position))
+        holder.itemView.setOnClickListener {
+            val mContext = holder.itemView.context
+            val isFavorite = listTopStory?.get(position)?.title == titleFavorite
+            (mContext as Activity).startActivityForResult(
+                DetailStoriesActivity.startActivity(
+                    mContext,
+                    listTopStory?.get(position),
+                    isFavorite
+                ),DetailStoriesActivity.RESULT_DETAIL
+            )
+        }
     }
 
     class ViewHolder(private val binding: ItemStoriesBinding):RecyclerView.ViewHolder(binding.root){
@@ -51,10 +68,6 @@ class StoryAdapter:RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
         fun bind(item:StoryResponse?){
             viewModel.bind(item)
             binding.viewModel = viewModel
-            binding.root.setOnClickListener {
-                val mContext = binding.root.context
-                (mContext as Activity).startActivityForResult(DetailStoriesActivity.startActivity(mContext,item,false),DetailStoriesActivity.RESULT_DETAIL)
-            }
         }
     }
 

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.testcodex.R
 import com.example.testcodex.databinding.ActivityTopstoriesBinding
@@ -15,6 +16,11 @@ class TopStoriesActivity:AppCompatActivity() {
     private lateinit var binding:ActivityTopstoriesBinding
     private lateinit var viewModel:TopStoriesViewModel
 
+    companion object{
+        const val INTENT_RESPONSE_STORY = "intent_top_response_story"
+        const val INTENT_ISFAVORITE = "intent_top_favorite_story"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -23,6 +29,9 @@ class TopStoriesActivity:AppCompatActivity() {
             ViewModelProviders.of(this).get(TopStoriesViewModel::class.java)
 //        ViewModelProvider(this).get(PostListViewModel::class.java)
         binding.viewModel = viewModel
+        viewModel.favoriteStory.observe(this, Observer {
+            viewModel.listTopStoryAdapter.changeFavorite(it)
+        })
         viewModel.loadTopStory()
     }
 
@@ -32,17 +41,16 @@ class TopStoriesActivity:AppCompatActivity() {
         if (requestCode == DetailStoriesActivity.RESULT_DETAIL) {
             println("resul = $resultCode")
             if (resultCode == Activity.RESULT_OK) {
-                val favorite = data?.getBooleanExtra(DetailStoriesActivity.INTENT_ISFAVORITE,false)?:false
-                val dataResponse = DetailStoriesActivity.getResponse(
-                    intent.getStringExtra(
-                        DetailStoriesActivity.INTENT_RESPONSE_STORY
-                    )?:""
-                )
+                val favorite = data?.getBooleanExtra(INTENT_ISFAVORITE,false)?:false
+                val responseString = data?.getStringExtra(INTENT_RESPONSE_STORY)?:""
+                println("${data?.extras} dataString Top")
+                println("top responseString = $responseString")
+                val dataResponse = DetailStoriesActivity.getResponse(responseString)
                 println("favorite = $favorite")
-                println("hasil dataString = ${intent.getStringExtra(DetailStoriesActivity.INTENT_RESPONSE_STORY)}")
-                println("hasil dataResponse = $dataResponse")
                 if(favorite){
-                    viewModel.favoriteStory.value = dataResponse?.title?:"Title Not Found"
+                    println("dataResponse = $dataResponse")
+                    println("dataResponse title = ${dataResponse?.title}")
+                    viewModel.favoriteStory.value = dataResponse?.title
                 }
             }
         }
