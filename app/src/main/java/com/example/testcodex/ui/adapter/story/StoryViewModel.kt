@@ -11,7 +11,7 @@ class StoryViewModel {
 
     fun bind(story:StoryResponse?){
         titleStory.value = story?.title
-        scoreStory.value = story?.score.toString()
-        sumCommentStory.value = story?.kids?.size.toString()
+        scoreStory.value = "score = ${story?.score.toString()}"
+        sumCommentStory.value = "komentar = ${story?.kids?.size.toString()}"
     }
 }

@@ -15,6 +15,7 @@
             android:layout_height="30dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="10dp"
             android:src="@drawable/ic_favorit_on"
             android:onClick="@{() -> viewModel.changeFavorite()}"
             />
@@ -25,6 +26,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_favorite_story"
+            android:layout_margin="10dp"
             android:textSize="20sp"
             android:textColor="@color/black"
             mutableText="@{viewModel.titleStory}"
@@ -33,12 +35,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_title_story"
+            android:layout_margin="20dp"
             android:orientation="vertical"
             >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 mutableText="@{viewModel.authorStory}"
+                android:layout_margin="10dp"
                 />
 
             <TextView
@@ -51,7 +55,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                mutableText="@{viewModel.textStory}"
+                android:layout_margin="10dp"
+                mutableHTML="@{viewModel.textStory}"
                 />
 
             <TextView
